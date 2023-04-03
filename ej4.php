@@ -137,12 +137,7 @@ function mostrarPorcentajesNotas($notas){
 }
 
 function buscarIgual($notas,$notaABuscar){
-  $contador = 0;
-  foreach ($notas as $nota) {
-    if ($nota == $notaABuscar) {
-      $contador++;
-    }
-  }
+  $contador = count(array_keys($notas, $notaABuscar));
   echo "$contador alumnos obtuvieron: $notaABuscar" . PHP_EOL;  
 }
 

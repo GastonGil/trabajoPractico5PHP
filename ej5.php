@@ -64,20 +64,9 @@ function mostrarNumeroDado($numeros){
 }
 
 function verificarOrdenAscendente($numeros){
-  $aux = null;
-  $ascendente = false;
-  foreach ($numeros as $posicion => $numero) {
-    if($posicion == 0){
-      $aux = $numero;
-    }else{
-      $ascendente = ($numero > $aux) ? true : false;
-      if($ascendente){
-        $aux = $numero;
-      }else{
-        break;
-      }
-    }
-  }
+  $numerosAux = $numeros;
+  sort($numeros);
+  $ascendente = ($numerosAux == $numeros)? true : false;
   if($ascendente){
     echo "El orden es ascendente." . PHP_EOL;
   }else{
