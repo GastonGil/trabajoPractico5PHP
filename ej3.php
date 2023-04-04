@@ -104,7 +104,7 @@ do {
       buscarValoresK($numeros);
       break;
     case '4':
-      echo $promedio = calcularPromedio($numeros);
+      echo $promedio = calcularPromedio($numeros) .PHP_EOL;
       break;
     case '5':
       buscarDatosMayorAPromedio($numeros,calcularPromedio($numeros));
