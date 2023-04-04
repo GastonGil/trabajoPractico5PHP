@@ -17,6 +17,7 @@ function crearNumeroValidado(){
     $n = readline("Ingrese un número: ");
     echo PHP_EOL;
   }while(!is_numeric($n));
+  $n = (int) $n;
   return $n;
 }
 function cargarArray(&$array){
@@ -28,11 +29,7 @@ function cargarArray(&$array){
 } 
 
 function calcularPromedio($numeros){
-  $acumulador = 0;
-  foreach($numeros as $numero){
-    $acumulador += $numero;
-  }
-  return $promedio = $acumulador / count($numeros);
+  return $promedio = array_sum($numeros) / count($numeros);
 }
 
 function mostrarSuperanPromedio($numeros,$promedio){
@@ -43,40 +40,25 @@ function mostrarSuperanPromedio($numeros,$promedio){
   }
 }
 function buscarMenor($numeros){
-  $menor = null;
-  $posicion = 0;
-  foreach($numeros as $posicionN => $numero){
-    if ($posicion == 0){
-      $menor = $numero;
-      $posicion++;
-    }else if($numero < $menor){
-      $menor = $numero;
-      $posicion = $posicionN;
-    }
+  $menor = min($numeros);
+  $minimos = array_keys($numeros,$menor,true);
+  foreach ($minimos as $posicionEncontrada) {
+    echo "Menor: $menor, Posición = $posicionEncontrada".PHP_EOL;
   }
-  echo ("Número = $menor, posición = $posicion");
 }
 
-function verificarDescendiente ($numeros){
-  $esMayor = false;
-  $numeroAnterior = null;
-  $cont = 0;
-  foreach ($numeros as $posicion => $numero) {
-    if($posicion == 0){
-      $numeroAnterior = $numero;
-    }else{
-      $esMayor = ($numero > $numeroAnterior) ? true : false;
-    }
-    if($posicion != 0 && $esMayor == false){
-      break;
-    }
+function verificarDescendiente($numeros){
+  $numerosAux = $numeros;
+  rsort($numeros);
+  $ascendente = ($numerosAux == $numeros)? true : false;
+  if($ascendente){
+    echo "El orden es descendiente." . PHP_EOL;
+  }else{
+    echo "El orden no es descendiente." . PHP_EOL;
   }
-  return $esMayor;  
 }
 $numeros = [];
 cargarArray($numeros);
 mostrarSuperanPromedio($numeros, $promedio = calcularPromedio($numeros));
-if($descendiente = verificarDescendiente($numeros)){
-  echo "Sus números estan ordenados en forma descendiente." .PHP_EOL; 
-}
+verificarDescendiente($numeros);
 buscarMenor($numeros);
