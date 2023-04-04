@@ -60,13 +60,7 @@ function validarRepetidos($numeros){
 }
 
 function calcularPromedio($numeros){
-  $acumulador = 0;
-  foreach($numeros as $numero){
-    $acumulador += $numero;
-  }
-  $promedio = $acumulador / count($numeros);
-  echo "El promedio es: $promedio" . PHP_EOL;
-  return $promedio;
+  return $promedio = array_sum($numeros) / count($numeros);
 }
 
 function buscarDatosMayorAPromedio($numeros, $promedio){
@@ -110,7 +104,7 @@ do {
       buscarValoresK($numeros);
       break;
     case '4':
-      $promedio = calcularPromedio($numeros);
+      echo $promedio = calcularPromedio($numeros);
       break;
     case '5':
       buscarDatosMayorAPromedio($numeros,calcularPromedio($numeros));
