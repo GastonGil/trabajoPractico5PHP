@@ -76,15 +76,10 @@ function mostrarNotas($notas){
   }
 }
 
-function calcularPromedio($notas){
-  $acumulador = 0;
-  foreach($notas as $nota){
-    $acumulador += $nota;
-  }
-  $promedio = $acumulador / count($notas);
-  echo "El promedio es: $promedio" . PHP_EOL;
-  return $promedio;
+function calcularPromedio($numeros){
+  return $promedio = array_sum($numeros) / count($numeros);
 }
+
 
 function buscarDatosMayorAPromedio($notas, $promedio){
   foreach ($notas as $posicion => $nota) {
@@ -95,54 +90,30 @@ function buscarDatosMayorAPromedio($notas, $promedio){
 }
 
 function notaMaxima($notas){
-  $notaMaxima = 0;
-  foreach ($notas as $nota) {
-    $notaMaxima = ($nota>$notaMaxima)? $nota : $notaMaxima;
-  }
-  return $notaMaxima;
+  return $notaMaxima = max($notas);
 }
 
 function mostrarSuperaronNotaMaxima($notas){
-  $notaMaxima = notaMaxima($notas);
-  echo "Nota máxima: $notaMaxima " .PHP_EOL;
-  $contador = 0;
-  foreach ($notas as $nota){
-    $contador = ($nota == $notaMaxima) ? $contador + 1 : $contador;
-  }
-  echo "La cantidad que superaron la nota máxima es: $contador" . PHP_EOL;
+  echo "Nota máxima: ".($notaMaxima = notaMaxima($notas)) .PHP_EOL;
+  echo "La cantidad que superaron la nota máxima es: ".($contador =  count(array_keys($notas,$notaMaxima))) . PHP_EOL;
 }
 
 function notaMinima($notas){
-  $notaMinima = null;
-  foreach ($notas as $posicion => $nota) {
-    $notaMinima = ($posicion == 0)? $nota : (($nota<$notaMinima)? $nota : $notaMinima);
-  }
-  return $notaMinima;
+  return $notaMinima = min($notas);
 }
 
 function mostrarPorcentajesNotas($notas){
-  $contadorMaximas = 0;
-  $contadorMinimas = 0;
-  $notaMaxima = notaMaxima($notas);
-  $notaMinima = notaMinima($notas);
-  foreach($notas as $nota){
-    if($nota == $notaMaxima){
-      $contadorMaximas++;
-    } else if ($nota == $notaMinima) {
-      $contadorMinimas++;
-    }  
-  }
-  echo "El porcentaje de máximas es: %" . $contadorMaximas * 100 / count($notas) .PHP_EOL;
-  echo "El porcentaje de minimas es: %" . $contadorMinimas * 100 / count($notas) .PHP_EOL;
+  echo "El porcentaje de máximas es: %" . count(array_keys($notas,notaMaxima($notas))) * 100 / count($notas) .PHP_EOL;
+  echo "El porcentaje de minimas es: %" .count(array_keys($notas,notaMinima($notas))) * 100 / count($notas) .PHP_EOL;
 }
 
 function buscarIgual($notas,$notaABuscar){
-  $contador = count(array_keys($notas, $notaABuscar));
-  echo "$contador alumnos obtuvieron: $notaABuscar" . PHP_EOL;  
+  $cantidad = count(array_keys($notas, $notaABuscar));
+  echo "$cantidad alumnos obtuvieron: $notaABuscar" . PHP_EOL;  
 }
 
 function validarArrayCargado($array){
-  return $estaCargado = (count($array) == 0)?false:true;
+  return $estaCargado = (empty($array))?false:true;
 }
 
 $notas = [];
@@ -159,7 +130,7 @@ do {
       mostrarNotas($notas);
       break;
     case '3':
-      calcularPromedio($notas);
+      echo $promedio = calcularPromedio($notas) .PHP_EOL;
       break;
     case '4':
       buscarDatosMayorAPromedio($notas,$promedio = calcularPromedio($notas));
