@@ -43,13 +43,11 @@ function mostrarPrimerosNs($numeros){
   }
 }
 function mostrarSumaPares($numeros){
-  $acumulador = 0;
-  foreach($numeros as $numero){
-    if ($numero % 2 == 0) {
-      $acumulador += $numero;
-    }  
-  }
-  echo "La suma de los pares es: $acumulador" . PHP_EOL;
+  echo "La suma de los pares es: ". array_sum(array_filter($numeros, function ($numero){
+    if($numero % 2 == 0){
+      return true;
+    }
+  })) . PHP_EOL;
 }
 function mostrarNumeroDado($numeros){
   $n = crearNumeroValidado();
